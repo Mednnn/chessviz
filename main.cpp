@@ -52,11 +52,8 @@ void getxy(string a, int& x, int& y, int& k, char f1, char f2)
 
 int main()
 {
-    int i, j;
-    bool end = false;
     PrintMas();
     int x1, x2, y1, y2;
-    bool oper;
     int k;
     string path = "input.txt";
     string str;
@@ -77,4 +74,5 @@ int main()
         PrintMas();
         count++;
     }
+    string b;
 }
