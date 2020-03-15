@@ -18,12 +18,15 @@ void PrintMas()
     cout << endl;
     int i, j;
     for (i = 0; i < 8; ++i) {
+        cout << i + 1 << "|";
         for (j = 0; j < 8; ++j) {
-            cout << mas[i][j];
+            cout << mas[i][j] << " ";
         }
 
         cout << endl;
     }
+    cout << " |_______________" << endl;
+    cout << "  a b c d e f g h";
     cout << endl;
 }
 
@@ -59,6 +62,7 @@ int main()
     string str;
     ifstream fin;
     fin.open(path);
+    int count = 0;
     while (!fin.eof()) {
         fin >> str;
         k = 0;
@@ -68,6 +72,9 @@ int main()
         y2 = (y2 - 7) * (-1);
         mas[y2][x2] = mas[y1][x1];
         mas[y1][x1] = ' ';
+        cout << endl << endl;
+        cout << count / 2 + 1 << "." << str << endl;
         PrintMas();
+        count++;
     }
 }
