@@ -1,17 +1,8 @@
-#include <iostream>
 #include <fstream>
-#include <string>
+#include <iostream>
 #include <stdio.h>
+#include <string>
 using namespace std;
-
-char mas[8][8] = {{'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                  {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                  {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                  {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}};
 
 void PrintMas()
 {
@@ -32,21 +23,25 @@ void PrintMas()
 
 void getxy(string a, int& x, int& y, int& k, char f1, char f2)
 {
-    char b;
+    char b = a[k];
     while (b != f1 && b != f2) {
-        b = a[k];
         switch (b <= 'h' && b >= 'a') {
         case true:
             x = (int)('h' - b + 1);
+            break;
+        default:
             break;
         }
         switch (b <= '8' && b >= '1') {
         case true:
             y = int(b) - 49;
             break;
+        default:
+            break;
         }
-
         k++;
+        if (k < a.length)
+            b = a[k];
     }
 }
 
