@@ -5,3 +5,4 @@ clang-format.1
 bin/
 build/
 *.o
+.travis.yml

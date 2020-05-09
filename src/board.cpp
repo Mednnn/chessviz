@@ -78,3 +78,185 @@ void board(char** mas)
     mas[7][7] = 'P';
     mas[7][8] = 'P';
 }
+
+bool correct_move(int y1, int x1, int y2, int x2, char** mas)
+{
+    if (mas[y1][x1] == 'p') {
+        if (mas[y2][x2] == ' ' && x1 == x2 && abs(y2 - y1) <= 2) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && mas[y2][x2] >= 65 && mas[y2][x2] <= 90
+            && ((y1 - 1 == y2 && x1 - 1 == x2)
+                || (y1 - 1 == y2 && x1 + 1 == x2))) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'P') {
+        if (mas[y2][x2] == ' ' && x1 == x2 && abs(y2 - y1) <= 2) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && mas[y2][x2] >= 97 && mas[y2][x2] <= 122
+            && ((y1 + 1 == y2 && x1 - 1 == x2)
+                || (y1 + 1 == y2 && x1 + 1 == x2))) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'r') {
+        if (mas[y2][x2] == ' ' && (x1 == x2 || y1 == y2)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && mas[y2][x2] >= 65 && mas[y2][x2] <= 90
+            && (x1 == x2 || y1 == y2)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'R') {
+        if (mas[y2][x2] == ' ' && (x1 == x2 || y1 == y2)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && mas[y2][x2] >= 97 && mas[y2][x2] <= 122
+            && (x1 == x2 || y1 == y2)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'n') {
+        if (mas[y2][x2] == ' ' && (pow(x2 - x1, 2) + pow(y2 - y1, 2)) == 5) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && mas[y2][x2] >= 65 && mas[y2][x2] <= 90
+            && (pow(x2 - x1, 2) + pow(y2 - y1, 2)) == 5) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'N') {
+        if (mas[y2][x2] == ' ' && (pow(x2 - x1, 2) + pow(y2 - y1, 2)) == 5) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && mas[y2][x2] >= 97 && mas[y2][x2] <= 122
+            && (pow(x2 - x1, 2) + pow(y2 - y1, 2)) == 5) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'b') {
+        if (mas[y2][x2] == ' ' && abs(y2 - y1) == abs(x2 - x1)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && mas[y2][x2] >= 65 && mas[y2][x2] <= 90
+            && abs(y2 - y1) == abs(x2 - x1)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'B') {
+        if (mas[y2][x2] == ' ' && abs(y2 - y1) == abs(x2 - x1)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && mas[y2][x2] >= 97 && mas[y2][x2] <= 122
+            && abs(y2 - y1) == abs(x2 - x1)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'q') {
+        if (mas[y2][x2] == ' '
+            && (x1 == x2 || y1 == y2 || (abs(y2 - y1) == abs(x2 - x1)))) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' '
+            && (x1 == x2 || y1 == y2 || (abs(y2 - y1) == abs(x2 - x1)))
+            && mas[y2][x2] >= 65 && mas[y2][x2] <= 90) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'Q') {
+        if (mas[y2][x2] == ' '
+            && (x1 == x2 || y1 == y2 || (abs(y2 - y1) == abs(x2 - x1)))) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' '
+            && (x1 == x2 || y1 == y2 || (abs(y2 - y1) == abs(x2 - x1)))
+            && mas[y2][x2] >= 97 && mas[y2][x2] <= 122) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'k') {
+        if (mas[y2][x2] == ' ' && (abs(y2 - y1) == 1 || abs(x2 - x1) == 1)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && (abs(y2 - y1) == 1 || abs(x2 - x1) == 1)
+            && mas[y2][x2] >= 65 && mas[y2][x2] <= 90) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    if (mas[y1][x1] == 'K') {
+        if (mas[y2][x2] == ' ' && (abs(y2 - y1) == 1 || abs(x2 - x1) == 1)) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        if (mas[y2][x2] != ' ' && (abs(y2 - y1) == 1 || abs(x2 - x1) == 1)
+            && mas[y2][x2] >= 97 && mas[y2][x2] <= 122) {
+            mas[y2][x2] = mas[y1][x1];
+            mas[y1][x1] = ' ';
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
