@@ -1,4 +1,7 @@
 *.o
 .vscode/
 a.out
-*.cpp#
+clang-format.1
+bin/
+build/
+*.o
