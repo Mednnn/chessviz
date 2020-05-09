@@ -15,13 +15,11 @@ int getxy(string a, int& x, int& y, int& k, char f1, char f2)
         switch (b <= 'h' && b >= 'a') {
         case true:
             x = (int)(-1 * ('a' - b)) + 1;
-            cout << x << " ";
             break;
         }
         switch (b <= '8' && b >= '1') {
         case true:
             y = int(b) - 49;
-            cout << y << endl;
             break;
         }
         k++;
@@ -44,10 +42,14 @@ int main()
     PrintMas(mas);
     int x1, x2, y1, y2;
     int k;
-    string path = "../input.txt";
+    // string path = "input.txt";
     string str;
     ifstream fin;
-    fin.open(path);
+    fin.open("src/input.txt");
+    if (!fin.is_open()) {
+        cout << "файл не найден";
+        return 0;
+    }
     int count = 0;
     while (!fin.eof()) {
         fin >> str;

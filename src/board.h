@@ -1,3 +1,6 @@
-#include <iostream>
-#include "board.cpp"
-void board(char **mas);
+#ifndef BOARD_H_
+#define BOARD_H_
+
+void board(char** mas);
+
+#endif

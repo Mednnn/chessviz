@@ -1,4 +1,4 @@
-#include <iostream>
+#include "board.h"
 void board(char** mas)
 {
     for (int i = 0; i <= 9; i++) {
