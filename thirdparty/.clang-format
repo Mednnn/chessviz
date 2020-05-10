@@ -53,6 +53,8 @@ IncludeBlocks:   Preserve
 IndentCaseLabels: false
 IndentPPDirectives: None
 IndentWidth:     4
+DisableFormat: true
+SortIncludes: false
 IndentWrappedFunctionNames: false
 KeepEmptyLinesAtTheStartOfBlocks: false
 MaxEmptyLinesToKeep: 1
