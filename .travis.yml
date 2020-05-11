@@ -1,6 +1,6 @@
 dist: xenial
-language: c++
-compiler: g++
+language: c
+compiler: gcc
 script:
   - git ls-files src/ | xargs clang-format -i && git diff --exit-code
   - make test
