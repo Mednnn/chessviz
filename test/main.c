@@ -1,15 +1,20 @@
 #define CTEST_MAIN
-#define CTEST_SEGFAULT
-#include <ctest.h>
 #include "board.h"
+#include <ctest.h>
 
-char** mas;
+char mas[10][10];
     
 
 
+
+CTEST(coords, incorrect_mode)
+{
+    ASSERT_FALSE(correct_move(-2, 1, 4, 1, mas));
+}
+
 CTEST(coords, correct_paws) 
 {
-    ASSERT_TRUE(correct_move(2,4,2,4,mas));
+    ASSERT_TRUE(correct_move(7, 1, 6, 1,mas));
 }
 
 CTEST(coords, incorrect_paws) 
@@ -34,10 +39,6 @@ CTEST(coords, incorrect_knight)
 
 int main(int argc, const char** argv)
 {
-    mas = new char*[10];
-    for (int i = 0; i < 10; i++)
-        mas[i] = new char[10];
-    board(mas);
-    int result = ctest_main(argc, argv);
-    return result;
+	board(mas);
+    return ctest_main(argc, argv);
 }

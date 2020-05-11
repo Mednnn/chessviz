@@ -1,5 +1,5 @@
 #include "board.h"
-void board(char** mas)
+void board(char mas[10][10])
 {
     for (int i = 0; i <= 9; i++) {
         for (int j = 0; j <= 9; j++)
@@ -79,7 +79,7 @@ void board(char** mas)
     mas[7][8] = 'P';
 }
 
-bool correct_move(int y1, int x1, int y2, int x2, char** mas)
+int correct_move(int y1, int x1, int y2, int x2, char mas[10][10])
 {
     if (mas[y1][x1] == 'p') {
         if (mas[y2][x2] == ' ' && x1 == x2 && abs(y2 - y1) <= 2) {
