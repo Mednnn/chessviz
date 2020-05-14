@@ -66,7 +66,7 @@ void chess_logic(char mas[10][10])
 {
     int end = 0;
     FILE* fin;
-    if ((fin = fopen("src/input.txt", "r")) == NULL) {
+    if ((fin = fopen("input.txt", "r")) == NULL) {
         printf("Cannot open file\n");
     }
     fseek(fin, 0, SEEK_END);
