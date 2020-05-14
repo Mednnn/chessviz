@@ -1,18 +1,17 @@
 #include "board.h"
 #include "board_print_plain.h"
 
-
 void board(char mas[10][10])
 {
     for (int i = 0; i <= 9; i++) {
         for (int j = 0; j <= 9; j++)
             mas[i][j] = ' ';
     }
-    for(int i = 1; i < 9; ++i){
-        mas[0][i] = (char)( (int)'a' + (i - 1));
-        mas[9][i] = (char)( (int)'a' + (i - 1));
-        mas[i][0] = (char)( (int)'1' + (i - 1));
-        mas[i][9] = (char)( (int)'1' + (i - 1));
+    for (int i = 1; i < 9; ++i) {
+        mas[0][i] = (char)((int)'a' + (i - 1));
+        mas[9][i] = (char)((int)'a' + (i - 1));
+        mas[i][0] = (char)((int)'1' + (i - 1));
+        mas[i][9] = (char)((int)'1' + (i - 1));
         mas[2][i] = 'p';
         mas[7][i] = 'P';
     }
@@ -36,62 +35,65 @@ void board(char mas[10][10])
     mas[8][8] = 'R';
 }
 
-
-
-int getxy(char a[20],char f1, char f2,int mode)
+int getxy(char a[20], char f1, char f2, int mode)
 {
     char b;
-    
+
     b = a[k];
     for (int i = 0; i < 3; ++i) {
-        if(b <= 'h' && b >= 'a'){
-            if(mode == 1) x_1 = (int)(-1 * ('a' - b)) + 1;
-            else x_2 = (int)(-1 * ('a' - b)) + 1;
-        }        
-        if(b <= '8' && b >= '1'){
-            if(mode == 1) y_1 = (int)((int)b - 49);
-            else y_2 = (int)b - 49;
+        if (b <= 'h' && b >= 'a') {
+            if (mode == 1)
+                x_1 = (int)(-1 * ('a' - b)) + 1;
+            else
+                x_2 = (int)(-1 * ('a' - b)) + 1;
+        }
+        if (b <= '8' && b >= '1') {
+            if (mode == 1)
+                y_1 = (int)((int)b - 49);
+            else
+                y_2 = (int)b - 49;
         }
         k++;
         b = a[k];
         if (b == '#')
             return 1;
     }
-    
+
     return 0;
 }
 
-
-void chess_logic(char mas[10][10]){
+void chess_logic(char mas[10][10])
+{
     int end = 0;
-    FILE *fin;
-    if((fin = fopen("src/input.txt","r")) == NULL){
+    FILE* fin;
+    if ((fin = fopen("src/input.txt", "r")) == NULL) {
         printf("Cannot open file\n");
     }
-    fseek(fin,0,SEEK_END);
+    fseek(fin, 0, SEEK_END);
     int size_t = ftell(fin);
-    fseek(fin,0,SEEK_SET);
+    fseek(fin, 0, SEEK_SET);
     char str[size_t];
     int count = 0;
-    fread(str,sizeof(char),size_t,fin);
-    printf("%s",str);
+    fread(str, sizeof(char), size_t, fin);
+    printf("%s", str);
     k = 0;
-    while(k<=size_t){
+    while (k <= size_t) {
         printf("\n\n");
-        printf("%d",(int)(count / 2) + 1);
+        printf("%d", (int)(count / 2) + 1);
         printf(".");
-        end = getxy(str, '-', 'x',1);
-        end = getxy(str, '#', ' ',2);
+        end = getxy(str, '-', 'x', 1);
+        end = getxy(str, '#', ' ', 2);
         y_1 = (y_1 - 8) * (-1);
-        y_2 = (y_2 - 8) * (-1);           
-        correct_move(y_1,x_1,y_2,x_2,mas);
-        for(int i = k - 6; i < k ; ++i) printf("%c",str[i]);
+        y_2 = (y_2 - 8) * (-1);
+        correct_move(y_1, x_1, y_2, x_2, mas);
+        for (int i = k - 6; i < k; ++i)
+            printf("%c", str[i]);
         printf("\n");
         PrintMas(mas);
         count++;
         if (end == 1)
             break;
-    }   
+    }
 }
 
 int correct_move(int y1, int x1, int y2, int x2, char mas[10][10])
