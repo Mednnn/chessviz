@@ -1,46 +1,21 @@
 #include "board.h"
+#include "board_print_plain.h"
+
+
 void board(char mas[10][10])
 {
     for (int i = 0; i <= 9; i++) {
         for (int j = 0; j <= 9; j++)
             mas[i][j] = ' ';
     }
-
-    mas[0][1] = 'a';
-    mas[0][2] = 'b';
-    mas[0][3] = 'c';
-    mas[0][4] = 'd';
-    mas[0][5] = 'e';
-    mas[0][6] = 'f';
-    mas[0][7] = 'g';
-    mas[0][8] = 'h';
-
-    mas[9][1] = 'a';
-    mas[9][2] = 'b';
-    mas[9][3] = 'c';
-    mas[9][4] = 'd';
-    mas[9][5] = 'e';
-    mas[9][6] = 'f';
-    mas[9][7] = 'g';
-    mas[9][8] = 'h';
-
-    mas[1][0] = '8';
-    mas[2][0] = '7';
-    mas[3][0] = '6';
-    mas[4][0] = '5';
-    mas[5][0] = '4';
-    mas[6][0] = '3';
-    mas[7][0] = '2';
-    mas[8][0] = '1';
-
-    mas[1][9] = '8';
-    mas[2][9] = '7';
-    mas[3][9] = '6';
-    mas[4][9] = '5';
-    mas[5][9] = '4';
-    mas[6][9] = '3';
-    mas[7][9] = '2';
-    mas[8][9] = '1';
+    for(int i = 1; i < 9; ++i){
+        mas[0][i] = (char)( (int)'a' + (i - 1));
+        mas[9][i] = (char)( (int)'a' + (i - 1));
+        mas[i][0] = (char)( (int)'1' + (i - 1));
+        mas[i][9] = (char)( (int)'1' + (i - 1));
+        mas[2][i] = 'p';
+        mas[7][i] = 'P';
+    }
 
     mas[1][1] = 'r';
     mas[1][2] = 'n';
@@ -59,24 +34,64 @@ void board(char mas[10][10])
     mas[8][6] = 'B';
     mas[8][7] = 'N';
     mas[8][8] = 'R';
+}
 
-    mas[2][1] = 'p';
-    mas[2][2] = 'p';
-    mas[2][3] = 'p';
-    mas[2][4] = 'p';
-    mas[2][5] = 'p';
-    mas[2][6] = 'p';
-    mas[2][7] = 'p';
-    mas[2][8] = 'p';
 
-    mas[7][1] = 'P';
-    mas[7][2] = 'P';
-    mas[7][3] = 'P';
-    mas[7][4] = 'P';
-    mas[7][5] = 'P';
-    mas[7][6] = 'P';
-    mas[7][7] = 'P';
-    mas[7][8] = 'P';
+
+int getxy(char a[20],char f1, char f2,int mode)
+{
+    char b;
+    
+    b = a[k];
+    for (int i = 0; i < 3; ++i) {
+        if(b <= 'h' && b >= 'a'){
+            if(mode == 1) x_1 = (int)(-1 * ('a' - b)) + 1;
+            else x_2 = (int)(-1 * ('a' - b)) + 1;
+        }        
+        if(b <= '8' && b >= '1'){
+            if(mode == 1) y_1 = (int)((int)b - 49);
+            else y_2 = (int)b - 49;
+        }
+        k++;
+        b = a[k];
+        if (b == '#')
+            return 1;
+    }
+    
+    return 0;
+}
+
+
+void chess_logic(char mas[10][10]){
+    int end = 0;
+    FILE *fin;
+    if((fin = fopen("src/input.txt","r")) == NULL){
+        printf("Cannot open file\n");
+    }
+    fseek(fin,0,SEEK_END);
+    int size_t = ftell(fin);
+    fseek(fin,0,SEEK_SET);
+    char str[size_t];
+    int count = 0;
+    fread(str,sizeof(char),size_t,fin);
+    printf("%s",str);
+    k = 0;
+    while(k<=size_t){
+        printf("\n\n");
+        printf("%d",(int)(count / 2) + 1);
+        printf(".");
+        end = getxy(str, '-', 'x',1);
+        end = getxy(str, '#', ' ',2);
+        y_1 = (y_1 - 8) * (-1);
+        y_2 = (y_2 - 8) * (-1);           
+        correct_move(y_1,x_1,y_2,x_2,mas);
+        for(int i = k - 6; i < k ; ++i) printf("%c",str[i]);
+        printf("\n");
+        PrintMas(mas);
+        count++;
+        if (end == 1)
+            break;
+    }   
 }
 
 int correct_move(int y1, int x1, int y2, int x2, char mas[10][10])
