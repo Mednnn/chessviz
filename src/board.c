@@ -55,6 +55,8 @@ int getxy(char a[20], char f1, char f2, int mode)
         }
         k++;
         b = a[k];
+        if (b == '\n')
+            k++;
         if (b == '#')
             return 1;
     }
@@ -86,8 +88,9 @@ void chess_logic(char mas[10][10])
         y_1 = (y_1 - 8) * (-1);
         y_2 = (y_2 - 8) * (-1);
         correct_move(y_1, x_1, y_2, x_2, mas);
-        for (int i = k - 6; i < k; ++i)
-            printf("%c", str[i]);
+        for (int i = k - 7; i < k; ++i)
+            if (str[i] != '\n')
+                printf("%c", str[i]);
         printf("\n");
         PrintMas(mas);
         count++;
