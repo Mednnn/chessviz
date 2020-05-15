@@ -19,8 +19,8 @@ bin/programa_test: build/programa_test.o build/board.o build/board_print_plain.o
 	gcc -Wall -Werror build/programa_test.o build/board.o build/board_print_plain.o -lm -o bin/programa_test
 
 
-.PHONY : clean_bin
-.PHONY : clean_build
+.PHONY : clean
+
 
 bin:
 	mkdir bin
@@ -28,7 +28,6 @@ bin:
 build:
 	mkdir build
 
-clean_build:
-	rm -rf build
-clean_bin:
-	rm -rf bin
+clean:
+	rm -rf bin/*
+	rm -rf build/*.o

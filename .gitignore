@@ -1,7 +1,6 @@
 *.o
 .vscode/
 a.out
-clang-format.1
 bin/
 build/
 *.o
