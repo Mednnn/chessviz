@@ -4,7 +4,6 @@ test: bin/programa_test
 
 
 
-
 build/programa_test.o: test/main.c build
 	gcc -I thirdparty -I src -c test/main.c -o build/programa_test.o
 build/main.o: src/main.c build
@@ -27,4 +26,7 @@ bin:
 
 build:
 	mkdir build
-	
+
+clean:
+	rm -rf build
+	rm -rf bin
